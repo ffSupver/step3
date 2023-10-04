@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XJTUANA招新系统</title>
+    <script src="jquery.js"></script>
+    <script src="ajax.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <div id="nav">
+        <ul class="navlist">
+            <li id="page0btn"><span class="nav-item">创建申请</span></li>
+            <li id="page1btn" onclick="getApplyHistory(applyHistory.data)"><span class="nav-item">申请状态</span></li>
+            <li id="page2btn"><span class="nav-item">关于我们</span></li>
+        </ul>
+    </div>
+    <!-- 创建申请 -->
+    <div id="page0">
+        <h1>新建申请</h1>
+        <div id="applyCreateWin">
+            <div class="applySelect">
+                选择轮次
+                <select id="roundSelect" class="applySelectBox">
+                </select>
+            </div>
+            <div class="applySelect">
+                选择社团
+                <select id="clubSelect" class="applySelectBox">
+                </select>
+            </div>
+            <div class="applySelect">
+                选择部门
+                <select id="depSelect" class="applySelectBox">
+                </select>
+            </div>
+            <div class="applySelect">
+                选择志愿顺序
+                <select id="caseType" class="applySelectBox">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+            <div class="applyCreate">
+                <button id="applyCreateBtn" onclick="applyCreate()">创建申请</button>
+            </div>
+        </div>
+    </div>
+    <!-- 申请状态 -->
+    <div id="page1" >
+        <!-- 已经申请的信息列表 -->
+        <div id="applyList">
+
+        </div>
+    </div>
+    <!-- 关于我们 -->
+    <div id="page2" >
+        <h1>学生网络管理协会网络申请系统</h1>
+        <h2>欢迎加入我们</h2>
+        <img src="./img/logo.png" class="logo">
+        <hr>
+        <h3>运维部</h3>
+        <div class="introduce"><ul>
+            <li>运维部是社团的核心力量，设有3个分部：兴庆运维部、雁塔运维部、创新港运维部，分别负责兴庆校区（含教学二区）、雁塔校区（含二附院）和创新港校区的学生区网络运行维护工作。</li>
+            <li>在这里，我们有学校网络中心的官方系统培训，也有前辈成员的悉心经验指导。</li>
+            <li>在这里，我们掌握网络基本原理和基础知识，了解校园网络设备分布与配置，领略网络运维工作的奥秘与魅力。</li>
+            <li>在这里，我们学习如何排查故障，如何解决各种网络问题，从电脑小白蜕变为帮助同学排忧解难的出色网管。</li>
+        </ul></div>
+        <img src="./img/maintenance.jpg" class="introduceImg">
+        <hr>
+        <h3>研发部</h3>
+        <div class="introduce">
+            <ul>
+                <li>研发部为社团提供技术支持，包括开发社团网站，完善各项功能，维护社团服务器，学校镜像站，智能答疑机器人。</li>
+                <li>这里有技术大牛，也有菜鸟萌新，但都有一颗热爱技术的心。</li>
+                <li>学技术绝不只是说说而已，不花时间去码代码、去实践、去思考、去遇到问题、去解决问题，永远不会进步，永远只是小白。</li>
+                <li>打酱油永远无法真正成为研发部的一员，无论起点高低，只有肯努力，肯下功夫，才能融入我们的研发团队。</li>
+            </ul>
+        </div>
+        <img src="./img/coding.jpg" class="introduceImg">
+    </div>
+    <!-- 页尾信息 -->
+    <div class="bottom">
+        <div class="void"></div>
+        <p>扫码关注微信平台：XJTUANA扫码加入招新咨询群：882622842</p>
+        <p><div id="bottomImgs"><img class="bottomImg" src="./img/xjtuana_wechat.jpg" draggable="false"><img class="bottomImg" src="./img/xjtuana_qq.jpg" draggable="false"></div></p>
+        <p>Copyright © XJTUANA 2022. All rights reserved. <a class="note" href="https://beian.miit.gov.cn/">陕ICP备2021013389号-1</a></p>
+    </div>
+    <!-- 启用js -->
+    <noscript>
+        <strong>We're sorry but ana-apply-system doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+</body>
+<script src="index.js"></script>
+</html>
