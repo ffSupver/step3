@@ -133,7 +133,7 @@ function getApplyHistory(data) {
 function deleteApply(event) {
     const deleteApplyId = event.target.dataset.id;
     // console.log(deleteApplyId);
-    fetch("https://ana.yidian.studio/api/apply/${" + deleteApplyId + "}", {
+    fetch("https://ana.yidian.studio/api/apply/{" + deleteApplyId + "}", {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
