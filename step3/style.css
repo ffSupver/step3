@@ -18,7 +18,7 @@
 .nav-item {
   float: left;
   height: 60px;
-  width: 15vw;
+  width: 30vw;
   background: linear-gradient(#71c3f6, #79c8fa);
   border: 0;
   line-height: 60px;
@@ -53,6 +53,16 @@
   line-height: 90px;
   font-size: 20px;
   /* background-color: aliceblue; */
+}
+@media screen and (max-width: 750px) {
+  .applySelect {
+    margin: auto;
+    width: 60%;
+    height: 90px;
+    text-align: center;
+    line-height: 45px;
+    font-size: 20px;
+  }
 }
 .applySelectBox {
   width: 60%;
