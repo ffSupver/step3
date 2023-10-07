@@ -1,6 +1,5 @@
 //获取申请数据
 let applyCreateInfo = {};
-let applyHistory = {};
 window.onload = function () {
     $.ajax({
         url: "https://ana.luthics.com/api/round", //https://ana.luthics.com/api/round<==http://localhost:3000/
@@ -12,19 +11,6 @@ window.onload = function () {
         },
         error: function () {
             alert("申请数据获取失败");
-        }
-    })
-    $.ajax({
-        url: "https://ana.luthics.com/api/case", //https://ana.luthics.com/api/case<==http://localhost:3001/
-        crossDomain: true,
-        type: "get",
-        datatype: "json",
-        success: function (data) {
-            applyHistory = data;
-            // console.log(applyHistory);
-        },
-        error: function () {
-            alert("申请列表获取失败");
         }
     })
 }

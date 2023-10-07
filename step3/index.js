@@ -84,11 +84,12 @@ function applyCreate() {
     if (!(roundSelect.value === '' || clubSelect.value === '' || depSelect.value === '')) {
         let newApply = {}
         newApply.round = roundSelect.value;
-        newApply.organizations = clubSelect.value;
+        newApply.organization = clubSelect.value;
         newApply.department = depSelect.value;
         newApply.userID = userID;
-        newApply.caseType = caseType.value;
-        // console.log(newApply);
+        newApply.caseType = Number(caseType.value);
+        newApply = JSON.stringify(newApply);
+        console.log(newApply);
         fetch('https://ana.yidian.studio/api/apply', {
                 method: 'POST',
                 body: newApply,
@@ -97,49 +98,80 @@ function applyCreate() {
                 }
             })
             .then(response => response.json())
-            .then(data => console.log(data))
+            .then(data => {
+                console.log(data);
+                if (data.code === 0) {
+                    alert("成功创建申请")
+                } else {
+                    const msg = data.msg;
+                    alert(msg);
+                }
+            })
             .catch(error => console.error(error))
     } else {
         alert("请选择所有选项")
     }
 }
-//渲染申请列表
-let listLoad = false;
-
-function getApplyHistory(data) {
-    if (listLoad == false) {
-        const applyList = document.getElementById('applyList');
-        for (i = 0; i < data.cases.length; i++) {
-            const caseNow = data.cases[i];
-            const voidDiv = document.createElement('div');
-            voidDiv.classList = "void";
-            const info = document.createElement('div')
-            info.classList = "applyList";
-            applyList.appendChild(voidDiv);
-            applyList.appendChild(info);
-            // console.log(applyCreateInfo.rounds.filter(round => round.id === caseNow.round)[0].organizations.filter(org => org.id === caseNow.organization))
-            info.innerHTML = "<br>" + "<p>申请轮次 : " + applyCreateInfo.rounds.filter(round => round.id === caseNow.round)[0].name + "</p>" +
-                "<p>申请者 : " + caseNow.username + "</p>" +
-                "<p>组织/部门 : " + applyCreateInfo.rounds.filter(round => round.id === caseNow.round)[0].organizations.filter(org => org.id === caseNow.organization)[0].name + "/" + applyCreateInfo.rounds.filter(round => round.id === caseNow.round)[0].organizations.filter(org => org.id === caseNow.organization)[0].department.filter(dep => dep.id === caseNow.department)[0].name + "</p>" +
-                "<p>申请时间 : " + caseNow.create_at.replace("T", " ").replace("Z", "") + "</p>" +
-                "<p>第" + caseNow.caseType + "志愿</p>" +
-                "<p>申请状态" + caseNow.status.name + "</p>" +
-                "<p>" + caseNow.message + "</p>" + "<br>" + "<div class='deleteBtn' onclick='deleteApply(event)' data-id=" + caseNow.id + ">放弃申请</div>" + "<br>"
-            listLoad = true;
+//获取申请列表
+function getApplyHistory() {
+    $.ajax({
+        url: "https://ana.luthics.com/api/case", //https://ana.luthics.com/api/case<==http://localhost:3001/
+        crossDomain: true,
+        type: "get",
+        datatype: "json",
+        success: function (data) {
+            let applyHistory = data.data;
+            // console.log(applyHistory);
+            displayApplyList(applyHistory);
+        },
+        error: function () {
+            alert("申请列表获取失败");
         }
+    })
+}
+
+//渲染申请列表
+function displayApplyList(data) {
+    const applyList = document.getElementById('applyList');
+    applyList.innerHTML = "";
+    for (i = 0; i < data.cases.length; i++) {
+        const caseNow = data.cases[i];
+        const voidDiv = document.createElement('div');
+        voidDiv.classList = "void";
+        const info = document.createElement('div')
+        info.classList = "applyList";
+        applyList.appendChild(voidDiv);
+        applyList.appendChild(info);
+        // console.log(applyCreateInfo.rounds.filter(round => round.id === caseNow.round)[0].organizations.filter(org => org.id === caseNow.organization))
+        info.innerHTML = "<br>" + "<p>申请轮次 : " + applyCreateInfo.rounds.filter(round => round.id === caseNow.round)[0].name + "</p>" +
+            "<p>申请者 : " + caseNow.username + "</p>" +
+            "<p>组织/部门 : " + applyCreateInfo.rounds.filter(round => round.id === caseNow.round)[0].organizations.filter(org => org.id === caseNow.organization)[0].name + "/" + applyCreateInfo.rounds.filter(round => round.id === caseNow.round)[0].organizations.filter(org => org.id === caseNow.organization)[0].department.filter(dep => dep.id === caseNow.department)[0].name + "</p>" +
+            "<p>申请时间 : " + caseNow.create_at.replace("T", " ").replace("Z", "") + "</p>" +
+            "<p>第" + caseNow.caseType + "志愿</p>" +
+            "<p>申请状态" + caseNow.status.name + "</p>" +
+            "<p>" + caseNow.message + "</p>" + "<br>" + "<div class='deleteBtn' onclick='deleteApply(event)' data-id=" + caseNow.id + ">放弃申请</div>" + "<br>"
+        listLoad = true;
     }
 }
 //放弃申请
 function deleteApply(event) {
     const deleteApplyId = event.target.dataset.id;
     // console.log(deleteApplyId);
-    fetch("https://ana.yidian.studio/api/apply/{" + deleteApplyId + "}", {
+    const url = `https://ana.yidian.studio/api/apply/${deleteApplyId}`
+    fetch(url, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
             }
         })
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => {
+            console.log(data);
+            if (data.code === 0) {
+                alert("已放弃申请");
+            } else {
+                alert(data.msg);
+            }
+        })
         .catch(error => console.error(error))
 }
