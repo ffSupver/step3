@@ -165,7 +165,7 @@
 /* 页尾 */
 .void {
   width: 100vw;
-  height: 20px;
+  height: 40px;
 }
 .bottom {
   margin: auto;
@@ -186,4 +186,32 @@
 .note {
   color: gray;
   text-decoration: underline;
+}
+/* 弹窗 */
+#win {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 60vw;
+  line-height: 15vw;
+  background: linear-gradient(#71c3f6, #79c8fa);
+  color: #fff;
+  border-radius: 3vw;
+  z-index: 100;
+  text-align: center;
+  font-size: 5vw;
+  user-select: none;
+  display: none;
+}
+#hitBox {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 110vw;
+  height: 1000vh;
+  background-color: black;
+  opacity: 0.5;
+  display: none;
 }

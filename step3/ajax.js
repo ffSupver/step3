@@ -11,7 +11,10 @@ window.onload = function () {
             change();
         },
         error: function () {
-            alert("申请数据获取失败");
+            alert("申请数据获取失败,将在1s后重新获取");
+            setTimeout(function () {
+                window.location.href = window.location.href;
+            }, 1000);
         }
     })
 }

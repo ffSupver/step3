@@ -14,6 +14,17 @@ for (let i = 0; i <= 2; i++) {
         };
     })(i));
 }
+//弹窗
+document.getElementById("hitBox").addEventListener('click', function () {
+    document.getElementById("hitBox").style.display = "none";
+    document.getElementById("win").style.display = "none";
+})
+
+function alert(data) {
+    document.getElementById("hitBox").style.display = "block";
+    document.getElementById("win").style.display = "block";
+    document.getElementById("win").innerHTML = data;
+}
 //获取创建申请的选项元素
 const roundSelect = document.getElementById('roundSelect');
 const clubSelect = document.getElementById('clubSelect');
@@ -126,7 +137,7 @@ function getApplyHistory() {
             displayApplyList(applyHistory);
         },
         error: function () {
-            alert("申请列表获取失败");
+            alert("申请列表获取失败,再次点击“申请列表”以重新获取");
         }
     })
 }
@@ -141,8 +152,8 @@ function displayApplyList(data) {
         voidDiv.classList = "void";
         const info = document.createElement('div')
         info.classList = "applyList";
-        applyList.appendChild(voidDiv);
         applyList.appendChild(info);
+        applyList.appendChild(voidDiv);
         // console.log(applyCreateInfo.rounds.filter(round => round.id === caseNow.round)[0].organizations.filter(org => org.id === caseNow.organization))
         info.innerHTML = "<br>" + "<p>申请轮次 : " + applyCreateInfo.rounds.filter(round => round.id === caseNow.round)[0].name + "</p>" +
             "<p>申请者 : " + caseNow.username + "</p>" +
@@ -155,11 +166,8 @@ function displayApplyList(data) {
     }
     if (applyList.innerHTML === "") {
         const noHistory = document.createElement("div");
-        const voidDiv = document.createElement('div');
-        voidDiv.classList = "void";
         noHistory.innerHTML = "目前没有申请记录!";
         noHistory.className = "noHistory";
-        applyList.appendChild(voidDiv);
         applyList.appendChild(noHistory);
     }
 }
