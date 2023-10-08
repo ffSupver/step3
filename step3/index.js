@@ -4,8 +4,13 @@ for (let i = 0; i <= 2; i++) {
         return function () {
             for (let k = 0; k <= 2; k++) {
                 document.getElementById("page" + k).style.display = "none";
+                document.getElementById("page" + page).style.display = "block";
+                document.getElementById("page" + k + "btn").classList.remove('nav-item-selected');
+                document.getElementById("page" + k + "btn").classList.add('nav-item');
+                var btn = document.getElementById("page" + page + "btn");
+                btn.classList.remove('nav-item');
+                btn.classList.add('nav-item-selected');
             }
-            document.getElementById("page" + page).style.display = "block";
         };
     })(i));
 }
@@ -14,69 +19,65 @@ const roundSelect = document.getElementById('roundSelect');
 const clubSelect = document.getElementById('clubSelect');
 const depSelect = document.getElementById('depSelect');
 const caseType = document.getElementById('caseType');
-//监听轮次选择变化并显示对应组织选项
+//更新对应组织选项
+function updateOrgSelects() {
+    var selectedRoundId = roundSelect.value;
+    const round = applyCreateInfo.rounds.find(round => round.id === selectedRoundId);
+    if (round) {
+        clubSelect.innerHTML = '';
+        depSelect.innerHTML = '';
+        round.organizations.forEach(org => {
+            const option = document.createElement('option');
+            option.id = org.id;
+            option.value = org.id;
+            option.textContent = org.name;
+            clubSelect.appendChild(option);
+        });
+    }
+}
+// 更新对应部门选项
+function updateDepSelect() {
+    var selectedRoundId = roundSelect.value;
+    const round = applyCreateInfo.rounds.find(round => round.id === selectedRoundId);
+    var selectedClubId = clubSelect.value;
+    const club = round.organizations.find(club => club.id === selectedClubId);
+    if (club) {
+        depSelect.innerHTML = '';
+        club.department.forEach(dep => {
+            const option = document.createElement('option');
+            option.id = dep.id;
+            option.value = dep.id;
+            option.textContent = dep.name;
+            depSelect.appendChild(option);
+        });
+    }
+}
+
+function loadData() {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            applyCreateInfo = JSON.parse(xhr.responseText);
+            updateDepSelect();
+        }
+    }
+}
+
+setTimeout(loadData, 50); // 延迟50ms加载数据
+//监听组织选择变化和轮次选择变化
 roundSelect.addEventListener('change', function () {
-    var selectedRoundId = roundSelect.value;
-    const round = applyCreateInfo.rounds.find(round => round.id === selectedRoundId);
-    if (round) {
-        clubSelect.innerHTML = '';
-        depSelect.innerHTML = '';
-        round.organizations.forEach(org => {
-            const option = document.createElement('option');
-            option.id = org.id;
-            option.value = org.id;
-            option.textContent = org.name;
-            clubSelect.appendChild(option);
-        });
-    }
+    updateOrgSelects();
 });
+
 roundSelect.addEventListener('click', function () {
-    var selectedRoundId = roundSelect.value;
-    const round = applyCreateInfo.rounds.find(round => round.id === selectedRoundId);
-    if (round) {
-        clubSelect.innerHTML = '';
-        depSelect.innerHTML = '';
-        round.organizations.forEach(org => {
-            const option = document.createElement('option');
-            option.id = org.id;
-            option.value = org.id;
-            option.textContent = org.name;
-            clubSelect.appendChild(option);
-        });
-    }
+    updateOrgSelects();
 });
-// 监听组织选择变化并显示对应部门选项
 clubSelect.addEventListener('change', function () {
-    var selectedRoundId = roundSelect.value;
-    const round = applyCreateInfo.rounds.find(round => round.id === selectedRoundId);
-    var selectedClubId = clubSelect.value;
-    const club = round.organizations.find(club => club.id === selectedClubId);
-    if (club) {
-        depSelect.innerHTML = '';
-        club.department.forEach(dep => {
-            const option = document.createElement('option');
-            option.id = dep.id;
-            option.value = dep.id;
-            option.textContent = dep.name;
-            depSelect.appendChild(option);
-        });
-    }
+    updateDepSelect();
 });
+
 clubSelect.addEventListener('click', function () {
-    var selectedRoundId = roundSelect.value;
-    const round = applyCreateInfo.rounds.find(round => round.id === selectedRoundId);
-    var selectedClubId = clubSelect.value;
-    const club = round.organizations.find(club => club.id === selectedClubId);
-    if (club) {
-        depSelect.innerHTML = '';
-        club.department.forEach(dep => {
-            const option = document.createElement('option');
-            option.id = dep.id;
-            option.value = dep.id;
-            option.textContent = dep.name;
-            depSelect.appendChild(option);
-        });
-    }
+    updateDepSelect();
 });
 let userID = "62fbbf83766b8d99998136a7" //已有的身份信息
 //创建申请表单

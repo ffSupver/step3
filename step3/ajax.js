@@ -28,7 +28,7 @@ function getApplyC(data) {
         roundSelect.appendChild(option);
     });
 }
-
+//第一次渲染所有申请信息选项
 function change() {
     var selectedRoundId = roundSelect.value;
     const round = applyCreateInfo.rounds.find(round => round.id === selectedRoundId);

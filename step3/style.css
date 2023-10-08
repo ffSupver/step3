@@ -29,8 +29,21 @@
 }
 .nav-item:hover {
   background: linear-gradient(#63bff8, #6cc1f6);
-  color: rgb(255, 255, 255);
-  font-size: 25px;
+  color: rgb(255, 255, 255) !important;
+  font-size: 25px !important;
+  height: 80px;
+}
+.nav-item-selected {
+  float: left;
+  height: 80px;
+  width: 30vw;
+  background: linear-gradient(#71c3f6, #79c8fa);
+  border: 0;
+  line-height: 80px;
+  text-align: center;
+  font-size: 20px;
+  color: rgb(0, 131, 246);
+  user-select: none;
 }
 /* 创建申请 */
 #page0 {
@@ -136,7 +149,7 @@
 /* 页尾 */
 .void {
   width: 100vw;
-  height: 5vw;
+  height: 20px;
 }
 .bottom {
   margin: auto;
