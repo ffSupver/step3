@@ -61,6 +61,14 @@ function updateDepSelect() {
             option.textContent = dep.name;
             depSelect.appendChild(option);
         });
+        caseType.innerHTML = '';
+        for (let i = 1; i <= club.availableChoice; i++) {
+            const option = document.createElement('option');
+            option.id = i;
+            option.value = i;
+            option.textContent = i;
+            caseType.appendChild(option);
+        }
     }
 }
 
