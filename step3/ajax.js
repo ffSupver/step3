@@ -8,6 +8,7 @@ window.onload = function () {
         datatype: "json",
         success: function (data) {
             getApplyC(data.data);
+            change();
         },
         error: function () {
             alert("申请数据获取失败");
@@ -26,5 +27,32 @@ function getApplyC(data) {
         option.textContent = round.name;
         roundSelect.appendChild(option);
     });
+}
 
+function change() {
+    var selectedRoundId = roundSelect.value;
+    const round = applyCreateInfo.rounds.find(round => round.id === selectedRoundId);
+    if (round) {
+        clubSelect.innerHTML = '';
+        depSelect.innerHTML = '';
+        round.organizations.forEach(org => {
+            const option = document.createElement('option');
+            option.id = org.id;
+            option.value = org.id;
+            option.textContent = org.name;
+            clubSelect.appendChild(option);
+        });
+    }
+    var selectedClubId = clubSelect.value;
+    const club = round.organizations.find(club => club.id === selectedClubId);
+    if (club) {
+        depSelect.innerHTML = '';
+        club.department.forEach(dep => {
+            const option = document.createElement('option');
+            option.id = dep.id;
+            option.value = dep.id;
+            option.textContent = dep.name;
+            depSelect.appendChild(option);
+        });
+    }
 }

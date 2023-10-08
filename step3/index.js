@@ -169,6 +169,7 @@ function deleteApply(event) {
             console.log(data);
             if (data.code === 0) {
                 alert("已放弃申请");
+                getApplyHistory();
             } else {
                 alert(data.msg);
             }
