@@ -153,6 +153,15 @@ function displayApplyList(data) {
             "<p>" + caseNow.message + "</p>" + "<br>" + "<div class='deleteBtn' onclick='deleteApply(event)' data-id=" + caseNow.id + ">放弃申请</div>" + "<br>"
         listLoad = true;
     }
+    if (applyList.innerHTML === "") {
+        const noHistory = document.createElement("div");
+        const voidDiv = document.createElement('div');
+        voidDiv.classList = "void";
+        noHistory.innerHTML = "目前没有申请记录!";
+        noHistory.className = "noHistory";
+        applyList.appendChild(voidDiv);
+        applyList.appendChild(noHistory);
+    }
 }
 //放弃申请
 function deleteApply(event) {
