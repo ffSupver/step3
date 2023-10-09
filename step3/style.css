@@ -191,7 +191,7 @@
 #win {
   position: fixed;
   left: 50%;
-  top: 50%;
+  top: 200%;
   transform: translate(-50%, -50%);
   width: 60vw;
   line-height: 15vw;
@@ -203,6 +203,7 @@
   font-size: 5vw;
   user-select: none;
   display: none;
+  transition: all 0.05s;
 }
 #hitBox {
   position: fixed;

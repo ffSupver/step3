@@ -17,6 +17,9 @@ for (let i = 0; i <= 2; i++) {
 //弹窗
 document.getElementById("hitBox").addEventListener('click', function () {
     document.getElementById("hitBox").style.display = "none";
+    setTimeout(() => {
+        document.getElementById("win").style.top = "200%";
+    }, 1);
     document.getElementById("win").style.display = "none";
 })
 
@@ -24,6 +27,9 @@ function alert(data) {
     document.getElementById("hitBox").style.display = "block";
     document.getElementById("win").style.display = "block";
     document.getElementById("win").innerHTML = data;
+    setTimeout(() => {
+        document.getElementById("win").style.top = "50%";
+    }, 1);
 }
 //获取创建申请的选项元素
 const roundSelect = document.getElementById('roundSelect');
