@@ -45,6 +45,18 @@ function updateOrgSelects() {
             clubSelect.appendChild(option);
         });
     }
+    var selectedClubId = clubSelect.value;
+    const club = round.organizations.find(club => club.id === selectedClubId);
+    if (club) {
+        depSelect.innerHTML = '';
+        club.department.forEach(dep => {
+            const option = document.createElement('option');
+            option.id = dep.id;
+            option.value = dep.id;
+            option.textContent = dep.name;
+            depSelect.appendChild(option);
+        });
+    }
 }
 // 更新对应部门选项
 function updateDepSelect() {
