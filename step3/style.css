@@ -198,17 +198,36 @@
   left: 50%;
   top: 200%;
   transform: translate(-50%, -50%);
-  width: 60vw;
-  line-height: 15vw;
+  width: 450px;
+  line-height: 120px;
   background: linear-gradient(#71c3f6, #79c8fa);
   color: #fff;
-  border-radius: 3vw;
+  border-radius: 20px;
   z-index: 100;
   text-align: center;
-  font-size: 5vw;
+  font-size: 40px;
   user-select: none;
   display: none;
   transition: all 0.05s;
+}
+@media screen and (max-width: 750px) {
+  #win {
+    position: fixed;
+    left: 50%;
+    top: 200%;
+    transform: translate(-50%, -50%);
+    width: 60vw;
+    line-height: 15vw;
+    background: linear-gradient(#71c3f6, #79c8fa);
+    color: #fff;
+    border-radius: 3vw;
+    z-index: 100;
+    text-align: center;
+    font-size: 5vw;
+    user-select: none;
+    display: none;
+    transition: all 0.05s;
+  }
 }
 #hitBox {
   position: fixed;
