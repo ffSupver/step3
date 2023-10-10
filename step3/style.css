@@ -31,6 +31,7 @@
   font-size: 20px;
   color: rgb(0, 131, 246);
   user-select: none;
+  transition: all 0.2s;
 }
 .nav-item:hover {
   background: linear-gradient(#63bff8, #6cc1f6);
