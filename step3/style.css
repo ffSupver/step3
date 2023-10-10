@@ -8,7 +8,8 @@
 .warpper {
   min-height: 100vh;
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 100vw;
+  grid-template-rows: 12fr auto;
 }
 /* 导航栏 */
 #nav {
@@ -59,6 +60,7 @@
   margin: auto;
   width: 600px;
   height: auto;
+  min-height: 60vh;
   color: rgb(1, 29, 72);
   background-color: rgb(190, 238, 245);
   border: rgb(0, 86, 173) solid 1px;
@@ -119,7 +121,7 @@
   user-select: none;
 }
 .applyList {
-  margin: auto;
+  margin: 0 auto;
   width: 450px;
   background-color: aquamarine;
   border: #166087 solid 1px;
@@ -165,19 +167,19 @@
 }
 .bottom {
   margin: auto;
-  width: 80%;
+  width: 600px;
   text-align: center;
   font-size: 2vw;
 }
 #bottomImgs {
   margin: auto;
-  width: 60%;
+  width: 80%;
   display: -webkit-flex;
   display: flex;
   justify-content: space-around;
 }
 .bottomImg {
-  height: 15vw;
+  width: 160px;
 }
 .note {
   color: gray;
@@ -235,6 +237,7 @@
     margin: auto;
     width: 80vw;
     height: auto;
+    min-height: 60vh;
     color: rgb(1, 29, 72);
     background-color: rgb(190, 238, 245);
     border: rgb(0, 86, 173) solid 1px;
@@ -271,5 +274,14 @@
     font-size: 5vw;
     line-height: 30vw;
     user-select: none;
+  }
+  .bottom {
+    margin: auto;
+    width: 80%;
+    text-align: center;
+    font-size: 2vw;
+  }
+  .bottomImg {
+    width: 33%;
   }
 }
